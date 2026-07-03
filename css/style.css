@@ -1,0 +1,239 @@
+/* 1. CSS CUSTOM PROPERTIES  */
+:root, [data-bs-theme="dark"] {
+    --bs-warning       : #DBD09B;
+    --bs-warning-rgb   : 219, 208, 155;
+    --bs-body-bg       : #473130;
+    --bs-body-color    : #fffff0;
+    --glass-bg-dark    : rgba(45, 30, 29, 0.5); /* Darker shade of the main color */
+    --glass-border-dark: rgba(219, 208, 155, 0.2);
+    --accent           : #DBD09B;
+    --accent-glow      : rgba(219, 208, 155, 0.4);
+    --accent-soft      : rgba(219, 208, 155, 0.08);
+    --dark-bg          : #473130; 
+    --deep-bg          : #2d1e1d; /* Very dark background shade */
+    --ivory-cream      : #FFFFF0; 
+    --dark-grey        : #3a2726; 
+}
+
+/* ─── 2. BASE / RESET */
+body {
+    font-family     : 'Inter', sans-serif;
+    background-color: var(--dark-bg);
+    color           : var(--ivory-cream);
+    transition      : background-color 0.4s ease, color 0.4s ease;
+    position        : relative;
+    overflow-x      : hidden;
+}
+
+/* Ambient glow behind content */
+body::before {
+    content       : '';
+    position      : fixed;
+    top           : -50%;
+    left          : -50%;
+    width         : 200%;
+    height        : 200%;
+    background    : radial-gradient(circle at center, rgba(71, 49, 48, 0.6) 0%, rgba(45, 30, 29, 1) 60%);
+    z-index       : -1;
+    pointer-events: none;
+}
+
+/* 4. TYPOGRAPHY */
+h1, h2, h3, h4, .anton-font {
+    font-family   : 'Anton', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight   : normal;
+}
+
+/* 5. GLASSMORPHISM UTILITY  */
+.glass {
+    background          : var(--glass-bg-dark);
+    backdrop-filter     : blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border              : 1px solid var(--glass-border-dark);
+    box-shadow          : 0 4px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* 6. HOVER UTILITIES */
+.hover-lift {
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                box-shadow 0.3s ease,
+                border-color 0.3s ease;
+}
+
+.hover-lift:hover {
+    transform   : translateY(-8px);
+    border-color: var(--accent);
+    box-shadow  : 0 10px 40px rgba(219, 208, 155, 0.15);
+}
+
+.btn-hover {
+    transition: all 0.3s ease;
+}
+
+.btn-hover:hover {
+    transform : scale(1.05);
+    box-shadow: 0 0 20px var(--accent-glow);
+}
+
+/* ─── 7. NAVBAR ─────────────────────────────────────────────── */
+.navbar.glass {
+    position     : sticky;
+    top          : 0;
+    z-index      : 1000;
+    border-left  : none;
+    border-right : none;
+    border-top   : none;
+    border-radius: 0;
+    width        : 100%;
+    margin-left  : 0;
+    margin-right : 0;
+}
+
+.navbar > .container {
+    flex-wrap: nowrap;
+}
+
+.navbar-brand {
+    overflow     : hidden;
+    text-overflow: ellipsis;
+    white-space  : nowrap;
+    flex-shrink  : 1;
+    min-width    : 0;
+}
+
+/* ─── 9. SOCIAL ICON BUTTONS ────────────────────────────────── */
+.social-icons {
+    display    : flex;
+    gap        : 1rem;
+    align-items: center;
+    flex-wrap  : wrap;
+}
+
+.social-icon-btn {
+    display        : inline-flex;
+    align-items    : center;
+    justify-content: center;
+    width          : 48px;
+    height         : 48px;
+    border-radius  : 50%;
+    font-size      : 1.3rem;
+    border         : 2px solid rgba(219, 208, 155, 0.5);
+    color          : var(--accent);
+    background     : var(--accent-soft);
+    text-decoration: none;
+    transition     : all 0.3s cubic-bezier(0.4, 2, 0.55, 0.44);
+    position       : relative;
+    overflow       : hidden;
+}
+
+.social-icon-btn::before {
+    content      : '';
+    position     : absolute;
+    inset        : 0;
+    background   : var(--accent);
+    border-radius: 50%;
+    transform    : scale(0);
+    transition   : transform 0.3s cubic-bezier(0.4, 2, 0.55, 0.44);
+    z-index      : 0;
+}
+
+.social-icon-btn:hover::before {
+    transform: scale(1);
+}
+
+.social-icon-btn i {
+    position  : relative;
+    z-index   : 1;
+    transition: color 0.3s;
+}
+
+.social-icon-btn:hover i {
+    color: var(--dark-bg);
+}
+
+.social-icon-btn:hover {
+    border-color: var(--accent);
+    box-shadow  : 0 0 20px var(--accent-glow);
+    transform   : translateY(-3px) scale(1.08);
+}
+
+/* ─── 10. CERTIFICATE FRAME ─────────────────────────────────── */
+.cert-frame {
+    border: 8px solid var(--dark-grey);
+    background-color: var(--deep-bg);
+    padding: 10px;
+    border-radius: 8px;
+    transition: all 0.4s ease;
+}
+.cert-frame:hover {
+    border-color: var(--accent);
+    box-shadow: 0 0 30px var(--accent-glow);
+    transform: scale(1.02);
+}
+
+/* ─── 11. TIMELINE (About Section) ─────────────────────────── */
+.timeline-item {
+    position: relative;
+}
+
+.timeline-badge {
+    width           : 14px;
+    height          : 14px;
+    background-color: var(--accent);
+    border-radius   : 50%;
+    position        : absolute;
+    left            : -8px;
+    top             : 4px;
+    box-shadow      : 0 0 10px var(--accent);
+}
+
+/* Custom Additions */
+.text-warning {
+    color: var(--accent) !important;
+}
+.bg-warning {
+    background-color: var(--accent) !important;
+}
+.border-warning {
+    border-color: var(--accent) !important;
+}
+.btn-warning {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: var(--dark-bg);
+}
+.btn-warning:hover {
+    background-color: #c9bc81;
+    border-color: #c9bc81;
+    color: var(--dark-bg);
+}
+.btn-outline-warning {
+    color: var(--accent);
+    border-color: var(--accent);
+}
+.btn-outline-warning:hover {
+    background-color: var(--accent);
+    color: var(--dark-bg);
+}
+
+/* ─── 12. HERO BACKGROUND IMAGE ───────────────────────────── */
+.hero-bg::before {
+    content: '';
+    position: absolute;
+    inset: -20px; /* Slight overflow to cover completely */
+    background-image: url('../Images/WhatsApp\ Image\ 2026-07-03\ at\ 6.25.27\ AM\ \(1\).jpeg');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.08; /* Very subtle so it doesn't clash with the text */
+    z-index: 0;
+    pointer-events: none;
+    mix-blend-mode: screen; /* Helps the white logo blend nicely into the dark background */
+}
+
+.hero-bg > div {
+    position: relative;
+    z-index: 2; /* Ensures text stays above the background */
+}
